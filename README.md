@@ -1,4 +1,6 @@
 **This is a cli tool based off [gfx_file_handler] (https://github.com/goosechooser/cps2-gfx-editor) but for people who dont want all the other modules in that repo**
+**tested to work on python3.6, confirmed to not work on python2.7**
+
 
 **:weary: what it does :weary:**
 * lets you (de)interleave CPS2 graphics files
