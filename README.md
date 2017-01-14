@@ -5,12 +5,11 @@
 
 **how to install**
 * clone / download the repo
-* cd cps2-gfx-file-manip
-* pip install .
+* pip install path/to/archive
 
 **example use :fire: :100: :100:**
-* cps2-file-manip gfx\sfx.14m -i (interleave sfx.14m, sfx.16m, sfx.18m, sfx.20m)
-* cps2-file-manip gfx\sfx.14m.16m.18m.20m.combined -d -v (deinterleave file with verbose flag)
+* cps2-file-manip path/to/files/sfx.14m -i (interleave sfx.14m, sfx.16m, sfx.18m, sfx.20m)
+* cps2-file-manip path/to/files/sfx.14m.16m.18m.20m.combined -d -v (deinterleave file with verbose flag)
 * cps2-file-manip -h (help)
 
 # :clap: dont :clap: @ :clap: me :clap: about :clap: roms :clap: :joy: :joy: :joy: :joy: 
