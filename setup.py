@@ -1,4 +1,4 @@
-from setuptools import setup
+from setuptools import setup, find_packages
 
 with open('README.md') as f:
     readme = f.read()
@@ -14,9 +14,9 @@ setup(
     author='M B',
     author_email='dont@me',
     license=license,
-    modules=['cps2_file_manip'],
+    packages=find_packages(),
     entry_points={
         'console_scripts': [
-            'cps2-file-manip=cps2_file_manip:main'],
+            'cps2-file-manip=cps2_file_manip.cli:main'],
         }
     )
