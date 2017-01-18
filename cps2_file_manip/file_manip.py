@@ -53,7 +53,7 @@ def _get_file_data(filepath):
     try:
         basefnum = int(fsplit[1][:-1])
     except IndexError:
-        print(basefname, 'is an invalid file name. Files should be formatted as - BASE.NUMBERm')
+        print(basefname, 'is an invalid file name. Files should be formatted as - BASE.NUMBERm', file=sys.stderr)
         sys.exit(1)
 
     to_split = []
@@ -65,7 +65,7 @@ def _get_file_data(filepath):
             with open(os.path.join(head, fname), 'rb') as f:
                 to_split.append(bytearray(f.read()))
         except FileNotFoundError as error:
-            print(error)
+            print(error, file=sys.stderr)
             sys.exit(1)
 
         fnames.append(fname)
@@ -82,7 +82,7 @@ def _combine_file_names(fnames):
 
 def interleave_cps2(fname, verbose=False):
     """Interleaves a set of 4 cps2 graphics files."""
-    
+
     names, to_split = _get_file_data(fname)
     interleaved = []
 
@@ -125,7 +125,7 @@ def deinterleave_cps2(fname, verbose=False):
         with open(fname, 'rb') as f:
             data = bytearray(f.read())
     except FileNotFoundError as error:
-        print(error)
+        print(error, file=sys.stderr)
         sys.exit(1)
 
     print("deinterleaving", tail)
@@ -143,8 +143,8 @@ def deinterleave_cps2(fname, verbose=False):
     deinterleaved = [interleave(final[i], final[i+4], 2) for i in range(4)]
 
     for i, fname in enumerate(fnames):
-        if verbose:
-            print("deinterleaved file", fname, "created")
+        print("deinterleaved file", fname, "created")
 
         with open(os.path.join(head, fname), 'wb') as f:
             f.write(deinterleaved[i])
+            
