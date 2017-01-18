@@ -1,13 +1,6 @@
-import os
 import argparse
-from struct import Struct
 from . import file_manip
 
-#GFX files (for cps2) seem to always be in batches of 4
-#workflow along the lines of 
-#point at first file (in batch of 4)
-#grap the four files
-#interleave the 4 in one go
 def main():
     parser = argparse.ArgumentParser(description='(de)interleave cps2 graphics files.')
     operations = parser.add_mutually_exclusive_group()
