@@ -17,6 +17,6 @@ setup(
     packages=find_packages(),
     entry_points={
         'console_scripts': [
-            'cps2-file-manip=cps2_file_manip.cli:main'],
+            'cps2-file-manip=cps2_file_manip.cli:test_main'],
         }
     )
