@@ -1,86 +1,35 @@
 import argparse
-from . import cps2
+#from . import cps2
 from cps2_file_manip.NeoGeo import NeoGeo
-
-# def cps2_main():
-#     parser = argparse.ArgumentParser(description='(de)interleave cps2 graphics files.')
-#     operations = parser.add_mutually_exclusive_group()
-#     operations.add_argument('-i', '--interleave', action='store_true',
-#                             help='interleave the files together')
-#     operations.add_argument('-d', '--deinterleave', action='store_true',
-#                             help='deinterleave the combined file')
-#     parser.add_argument('file', type=str,
-#                         help='first file to interleave or combined file to deinterleave')
-
-#     parser.add_argument('-v', '--verbose', action='store_true',
-#                         help='make it wordy')
-#     args = parser.parse_args()
-
-#     if args.interleave:
-#         cps2.interleave_files(args.file, verbose=args.verbose)
-#     elif args.deinterleave:
-#         cps2.deinterleave_file(args.file, verbose=args.verbose)
-#     else:
-#         print('no operation selected')
-
-# def neogeo_main():
-#     parser = argparse.ArgumentParser(description='(de)interleave neo geo graphics files.')
-#     operations = parser.add_mutually_exclusive_group()
-#     operations.add_argument('-i', '--interleave', action='store_true',
-#                             help='interleave the files together')
-#     operations.add_argument('-d', '--deinterleave', action='store_true',
-#                             help='deinterleave the combined file')
-#     parser.add_argument('file', type=str,
-#                         help='first file to interleave or combined file to deinterleave')
-
-#     parser.add_argument('-v', '--verbose', action='store_true',
-#                         help='make it wordy')
-#     args = parser.parse_args()
-
-#     if args.interleave:
-#         neogeo.interleave_files(args.file, verbose=args.verbose)
-#     elif args.deinterleave:
-#         neogeo.deinterleave_file(args.file, verbose=args.verbose)
-#     else:
-#         print('no operation selected')
+from cps2_file_manip.CustomFormat import CustomFormat
 
 def test_main():
-    parser = argparse.ArgumentParser(description='(de)interleave neo geo graphics files.')
-    operations = parser.add_mutually_exclusive_group()
-    operations.add_argument('-i', '--interleave', action='store_true',
-                            help='interleave the files together')
-    operations.add_argument('-d', '--deinterleave', action='store_true',
-                            help='deinterleave the combined file')
-
+    parser = argparse.ArgumentParser(description='(de)interleave binary files.')
+    parser.add_argument('files', type=str, nargs='*',
+                        help='1 file to deinterleave, 2 files to interleave')
+    parser.add_argument('numbytes', type=int,
+                        help='number of bytes to (de)interleave by')
+    parser.add_argument('-s', '--saveas', type=str, nargs='*',
+                        help='specify where to save output, default is current working directory')
     parser.add_argument('-f', '--format', type=str,
-                        help='Specify a file format. None is default')
-
-    parser.add_argument('--infiles', nargs='*',
-                        help='file(s) to process')
-
-
-    parser.add_argument('file', type=str,
-                        help='first file to interleave or combined file to deinterleave')
+                        help='specify a file format, options are: \'cps2\' or \'neogeo\'')
     parser.add_argument('-v', '--verbose', action='store_true',
                         help='make it wordy')
+
     args = parser.parse_args()
     print(args)
 
+    #Do special things wrt how saved files are named for neogeo and cps2
     if args.format == 'neogeo':
-        formatter = NeoGeo()
+        formatter = NeoGeo(args.verbose)
     else:
-        formatter = None
+        formatter = CustomFormat(args.files, args.numbytes, args.saveas, verbose=args.verbose)
 
-    # if args.infiles:
-    #     print(type(formatter))
-    #     formatter.interleave_files(args.infiles)
-    # else:
-    #     print(type(formatter))
-
-    if args.interleave:
-        formatter.interleave_files(args.file, verbose=args.verbose)
-    elif args.deinterleave:
-        formatter.deinterleave_file(args.file, verbose=args.verbose)
+    #Right now only handles 1 or 2 files
+    #Eventually ... more?
+    if len(args.files) == 1:
+        formatter.deinterleave_file()
+    elif len(args.files) == 2:
+        formatter.interleave_files()
     else:
-        print('no operation selected')
-
+        print('ruh o')
