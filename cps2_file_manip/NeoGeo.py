@@ -21,10 +21,13 @@ class NeoGeo(FileFormat):
         fname = '.'.join(['c' + str(fnum)] * 2)
         return '-'.join([basename, fname])
 
-    def _get_file_data(self, filepath):
+    #not sure passing 1 file path and appending the other numbers is correct
+    #dont like that it returns two lists
+    #this should probably be a function for 1 file
+    def _get_file_data(self, filepaths):
         #check how many files were specified
         #for now just testing case of 1 file
-        head, tail = os.path.split(filepath)
+        head, tail = os.path.split(filepaths)
 
         to_split = []
         fnames = []
@@ -50,8 +53,8 @@ class NeoGeo(FileFormat):
 
         return '-'.join([base, comb_fnums])
 
-    def interleave_files(self, fnames, verbose=False):
-        verboseprint = print if verbose else lambda *a, **k: None
+    def interleave_files(self, fnames):
+        verboseprint = print if self._verbose else lambda *a, **k: None
         # for fname in fnames:
         #     print('neogeo ', fname)
         names, to_interleave = self._get_file_data(fnames)
@@ -67,7 +70,7 @@ class NeoGeo(FileFormat):
         with open(os.path.join(head, comb_fname), 'wb') as f:
             f.write(interleaved)
 
-    def deinterleave_file(self, fname, verbose=False):
+    def deinterleave_file(self, fname):
         head, tail = os.path.split(fname)
         split_tail = tail.split('-')
         base = split_tail[0]
@@ -95,5 +98,5 @@ if __name__ == '__main__':
     inputf = 'breakrevgfx/245-c1.c1'
     inputd = 'breakrevgfx/245-c1.c2.combined'
     temp = NeoGeo()
-    temp.interleave_files(inputf, verbose=True)
+    temp.interleave_files(inputf)
     #temp.deinterleave_file(inputd)
