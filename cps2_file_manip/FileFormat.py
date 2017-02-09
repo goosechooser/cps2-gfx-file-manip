@@ -1,3 +1,4 @@
+import sys
 from abc import ABCMeta, abstractmethod
 
 class FileFormat(object):
@@ -26,3 +27,13 @@ class FileFormat(object):
     @nsplit.setter
     def nsplit(self, value):
         self._nsplit = value
+
+    @staticmethod
+    def open_file(filepath):
+        """Error handling. Returns bytearray of data in file"""
+        try:
+            with open(filepath, 'rb') as f:
+                return bytearray(f.read())
+        except FileNotFoundError as error:
+            print(error, file=sys.stderr)
+            sys.exit(1)
