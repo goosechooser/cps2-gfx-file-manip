@@ -1,5 +1,5 @@
-from struct import Struct
-
+import sys
+import struct
 #all i ask for is "interleave {files here} bytesize"
 #and the opposite "deinterleave interleavedfile bytesize numberoffiles"
 #example midway unit T
@@ -12,14 +12,24 @@ def deinterleave(data, nbytes, nsplit):
     """
     deinterleaved = [[] for n in range(nsplit)]
 
-    deinterleave_s = Struct('c' * nbytes)
-    deinterleave_iter = deinterleave_s.iter_unpack(data)
+    deinterleave_s = struct.Struct('c' * nbytes)
 
-    for i in deinterleave_iter:
-        deinterleaved[0].extend([*i])
-        for j in range(1, len(deinterleaved[1:]) + 1):
-            next_ = next(deinterleave_iter)
-            deinterleaved[j].extend([*next_])
+    try:
+        deinterleave_iter = deinterleave_s.iter_unpack(data)
+    except struct.error as error:
+        print('ERROR:', error, 'CLOSING', file=sys.stderr)
+        sys.exit(1)
+
+    #this could cause rounding errors?
+    iterlen = int(len(data) / (nbytes * nsplit))
+    print('iterlen is:', iterlen)
+    for _ in range(iterlen):
+        for i, _ in enumerate(deinterleaved):
+            try:
+                next_ = next(deinterleave_iter)
+            except StopIteration:
+                pass
+            deinterleaved[i].extend([*next_])
 
     return [b''.join(delist) for delist in deinterleaved]
 
@@ -28,8 +38,15 @@ def interleave(data, nbytes):
 
     Returns a bytearray.
     """
-    interleave_s = Struct('c' * nbytes)
-    iters = [interleave_s.iter_unpack(inter) for inter in data]
+    interleave_s = struct.Struct('c' * nbytes)
+    iters = []
+
+    for inter in data:
+        try:
+            iters.append(interleave_s.iter_unpack(inter))
+        except struct.error as error:
+            print('ERROR:', error, 'CLOSING', file=sys.stderr)
+            sys.exit(1)
 
     interleaved = []
     #this could cause rounding errors?
