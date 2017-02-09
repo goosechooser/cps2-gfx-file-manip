@@ -16,21 +16,21 @@
 
 ## usage - deinterleaving
 * saving to current working directory with default file name  
-`cps2-file-manip FILE NBYTES NOUTPUTS -v`
+`unfman FILE NBYTES NOUTPUTS -v`
 
 * saving to a different directory with custom file name  
-`cps2-file-manip FILE NBYTES NOUTPUTS -o testdir\howdy.pardner -v`
+`unfman FILE NBYTES NOUTPUTS -o testdir\howdy.pardner -v`
 
 * saving to a different directory with default file name  
-`cps2-file-manip FILE NBYTES NOUTPUTS -o testdir\ -v` 
+`unfman FILE NBYTES NOUTPUTS -o testdir\ -v` 
 
 ## usage - interleaving
 * saving to current working directory with default file name  
-`cps2-file-manip FILE1 FILE2 .. FILEN NBYTES -v`
+`unfman FILE1 FILE2 .. FILEN NBYTES -v`
 
 * saving to a different directory with custom file name  
-`cps2-file-manip FILE1 FILE2 .. FILEN NBYTES -o testdir\yeehaw -v`
+`unfman FILE1 FILE2 .. FILEN NBYTES -o testdir\yeehaw -v`
 
 * saving to a different directory with default file name  
-`cps2-file-manip FILE1 FILE2 .. FILEN NBYTES -o testdir\ -v`
+`unfman FILE1 FILE2 .. FILEN NBYTES -o testdir\ -v`
 
