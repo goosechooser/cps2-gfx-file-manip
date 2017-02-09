@@ -7,9 +7,9 @@ with open('LICENSE') as f:
     license = f.read()
 
 setup(
-    name='cps2-file-manip',
-    version='1.0',
-    description='allows you to (de)interleave CPS2 graphics files',
+    name='cps2-file-manip-unstable',
+    version='1.1',
+    description='allows you to (de)interleave CPS2 files',
     long_description=readme,
     author='M B',
     author_email='dont@me',
@@ -17,6 +17,6 @@ setup(
     packages=find_packages(),
     entry_points={
         'console_scripts': [
-            'cps2-file-manip=cps2_file_manip.cli:main'],
+            'unfman=cps2_file_manip.cli:main'],
         }
     )
