@@ -36,14 +36,15 @@ class CustomFormat(FileFormat):
         self.verboseprint('Opening file')
         fdata = self.open_file(self._filepaths[0])
 
-        self.verboseprint('Deinterleaving files every', self._numbytes, 'bytes')
+        self.verboseprint('Deinterleaving file every', self._numbytes, 'bytes')
+        self.verboseprint('Producing', self._nsplit, 'files')
         deinterleave_data = deinterleave(fdata, self._numbytes, self._nsplit)
 
         # self.save_file(deinterleave_data, 'deinterleave')
         #if no custom output, save to cwd with default name
         if not self._savepaths:
             fname = [os.path.split(fname)[1] for fname in self._filepaths]
-            spaths = ['.'.join([fname[0], str(i), 'bin']) for i in range(self._nsplit)]
+            spaths = ['.'.join([fname[0], str(i)]) for i in range(self._nsplit)]
 
         #if custom output is a folder, save default file name to that location
         elif os.path.isdir(self._savepaths):
