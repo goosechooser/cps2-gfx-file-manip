@@ -1,5 +1,7 @@
 **This is a cli tool for (de)interleaving files**
+
 **Though its currently in the 'unstable' branch of cps2-file-manip, it will probably fork off into its own deal**
+
 **tested to work on python3.6, confirmed to not work on python2.7**
 
 
