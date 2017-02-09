@@ -15,6 +15,7 @@
 * can deinterleave a file into an arbitrary amount of files together by an arbitrary number of bytes (this entire claim is untested)
 
 ## usage - deinterleaving
+<<<<<<< HEAD
 * saving to current working directory with default file name  
 `cps2-file-manip FILE NBYTES NOUTPUTS -v`
 
@@ -32,4 +33,23 @@
 `cps2-file-manip FILE1 FILE2 .. FILEN NBYTES -o testdir\yeehaw -v`
 
 * saving to a different directory with default file name  
+=======
+saving to current working directory with default file name  
+`cps2-file-manip FILE NBYTES NOUTPUTS -v`
+
+saving to a different directory with custom file name  
+`cps2-file-manip FILE NBYTES NOUTPUTS -o testdir\howdy.pardner -v`
+
+saving to a different directory with default file name  
+`cps2-file-manip FILE NBYTES NOUTPUTS -o testdir\ -v` 
+
+## usage - interleaving
+saving to current working directory with default file name  
+`cps2-file-manip FILE1 FILE2 .. FILEN NBYTES -v`
+
+saving to a different directory with custom file name  
+`cps2-file-manip FILE1 FILE2 .. FILEN NBYTES -o testdir\yeehaw -v`
+
+saving to a different directory with default file name  
+>>>>>>> 0b7bca09115dfbea0571abdf96134f7a3b8090e0
 `cps2-file-manip FILE1 FILE2 .. FILEN NBYTES -o testdir\ -v`
