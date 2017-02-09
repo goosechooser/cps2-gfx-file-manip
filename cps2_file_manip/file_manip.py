@@ -1,6 +1,6 @@
 from struct import Struct
 
-#all i ask for is "interleave {files here} bytesize" 
+#all i ask for is "interleave {files here} bytesize"
 #and the opposite "deinterleave interleavedfile bytesize numberoffiles"
 #example midway unit T
 #functions should accept a list, and numbytes to (de)interleave by
@@ -34,18 +34,10 @@ def interleave(data, nbytes):
     interleaved = []
     #this could cause rounding errors?
     iterlen = int(len(data[0]) / nbytes)
-    for i in range(iterlen):
+    for _ in range(iterlen):
         nexts = [next(iter_) for iter_ in iters]
         # print('nexts is:', nexts)
         interleaved.extend([b''.join(val) for val in nexts])
         # print('interleaved is:', interleaved)
 
     return b''.join(interleaved)
-
-if __name__ == '__main__':
-    data1 = bytearray.fromhex('AA AA AA AA BB BB BB BB CC CC CC CC DD DD DD DD')
-    result = deinterleave(data1, 1, 8)
-    #print(result)
-    #newresult = interleave(result, 2)
-    #print(newresult)
-
