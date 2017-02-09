@@ -6,8 +6,11 @@
 * tested to work on python 3.6, confirmed to not work on python 2.7
 
 ## how to install
-* clone / download the repo
-* pip install path/to/archive
+* download the repo then `pip install path/to/archive`    
+or  
+* `pip install git+git://github.com/goosechooser/cps2-gfx-file-manip.git@unstable`  
+(you may need to use sudo)
+
 
 ## features
 * automatically recognizes whether to interleave or deinterleave based on number of input files

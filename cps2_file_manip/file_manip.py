@@ -1,9 +1,5 @@
 import sys
 import struct
-#all i ask for is "interleave {files here} bytesize"
-#and the opposite "deinterleave interleavedfile bytesize numberoffiles"
-#example midway unit T
-#functions should accept a list, and numbytes to (de)interleave by
 
 def deinterleave(data, nbytes, nsplit):
     """Deinterleaves one bytearray into nsplit many bytearrays on a nbytes basis.
@@ -17,6 +13,7 @@ def deinterleave(data, nbytes, nsplit):
     try:
         deinterleave_iter = deinterleave_s.iter_unpack(data)
     except struct.error as error:
+        #this error can be many things, handling generically until otherwise
         print('ERROR:', error, 'CLOSING', file=sys.stderr)
         sys.exit(1)
 

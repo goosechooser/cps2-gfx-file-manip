@@ -11,7 +11,6 @@ class CustomFormat(FileFormat):
         self.verboseprint('Interleaving files every', self._numbytes, 'bytes')
         interleave_data = interleave(data, self._numbytes)
 
-        # self.save_file(interleave_data, 'interleave')
         #if no custom output, save to cwd with default name
         if not self._savepaths:
             fnames = [os.path.split(fname)[1] for fname in self._filepaths]
@@ -40,7 +39,6 @@ class CustomFormat(FileFormat):
         self.verboseprint('Producing', self._nsplit, 'files')
         deinterleave_data = deinterleave(fdata, self._numbytes, self._nsplit)
 
-        # self.save_file(deinterleave_data, 'deinterleave')
         #if no custom output, save to cwd with default name
         if not self._savepaths:
             fname = [os.path.split(fname)[1] for fname in self._filepaths]
