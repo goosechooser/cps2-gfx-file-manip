@@ -25,8 +25,12 @@ def bswap_main():
                         https://docs.python.org/3/library/struct.html#format-characters""")
     parser.add_argument('-o', '--output', type=str,
                         help='specify where to save output, default is current working directory')
+    parser.add_argument('-v', '--verbose', action='store_true',
+                        help='make it wordy')
     args = parser.parse_args()
-    #fill in the rest
+
+    formatter = CustomFormat([args.file], None, args.output, verbose=args.verbose)
+    formatter.bswap_file(args.format)
 
 def unfman_main():
     parser = argparse.ArgumentParser(description='(de)interleave binary files.')
