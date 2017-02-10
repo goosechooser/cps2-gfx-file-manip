@@ -3,6 +3,9 @@ import argparse
 #from cps2_file_manip.NeoGeo import NeoGeo
 from cps2_file_manip.CustomFormat import CustomFormat
 
+#works great except cps2-manip is now asking for byte size
+#FIX IT ^^^^
+
 def is_number(s):
     try:
         int(s)
@@ -10,7 +13,22 @@ def is_number(s):
     except ValueError:
         return False
 
-def main():
+def bswap_main():
+    parser = argparse.ArgumentParser(description='swaps bytes on a given basis')
+    parser.add_argument('file', type=str,
+                        help='input file')
+    parser.add_argument('format', type=str,
+                        help="""format to use when byte swapping.
+                        possible formats are: 16 bits - h, H;
+                        32 bits - l, L, i, I; 64 bits - q, Q
+                        more information can be found at: 
+                        https://docs.python.org/3/library/struct.html#format-characters""")
+    parser.add_argument('-o', '--output', type=str,
+                        help='specify where to save output, default is current working directory')
+    args = parser.parse_args()
+    #fill in the rest
+
+def unfman_main():
     parser = argparse.ArgumentParser(description='(de)interleave binary files.')
     parser.add_argument('files', type=str, nargs='*',
                         help="""1 file and a number (how many files to output) to deinterleave,

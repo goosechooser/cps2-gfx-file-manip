@@ -1,5 +1,5 @@
 import os
-from cps2_file_manip.file_manip import interleave, deinterleave
+from cps2_file_manip.file_manip import interleave, deinterleave, swap
 from cps2_file_manip.FileFormat import FileFormat
 
 #Other possible names, GenericFormat / NoFormat ?
@@ -63,3 +63,30 @@ class CustomFormat(FileFormat):
             with open(savepath, 'wb') as f:
                 self.verboseprint('Saving', savepath)
                 f.write(deinterleave_data[i])
+
+    def bswap_file(self, fmt):
+        self.verboseprint('Opening file')
+        fdata = self.open_file(self._filepaths[0])
+
+        self.verboseprint('Byte swapping file every', fmt, 'bytes')
+        swapped = swap(fdata, fmt)
+
+        #if no custom output, save to cwd with default name
+        if not self._savepaths:
+            fnames = [os.path.split(fname)[1] for fname in self._filepaths]
+            spath = '.'.join([*fnames, 'swapped'])
+
+        #if custom output is a folder, save default file name to that location
+        elif os.path.isdir(self._savepaths):
+            head = self._savepaths
+            fnames = [os.path.split(fname)[1] for fname in self._filepaths]
+            tail = '.'.join([*fnames, 'swapped'])
+            spath = os.path.join(head, tail)
+
+        #else use given output
+        else:
+            spath = self._savepaths
+
+        with open(spath, 'wb') as f:
+            self.verboseprint('Saving', spath)
+            f.write(swapped)

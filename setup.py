@@ -17,6 +17,7 @@ setup(
     packages=find_packages(),
     entry_points={
         'console_scripts': [
-            'unfman=cps2_file_manip.cli:main'],
+            'unfman=cps2_file_manip.cli:unfman_main',
+            'bswap=cps2_file_manip.cli:bswap_main'],
         }
     )

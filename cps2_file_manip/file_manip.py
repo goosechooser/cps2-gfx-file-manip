@@ -55,3 +55,25 @@ def interleave(data, nbytes):
         # print('interleaved is:', interleaved)
 
     return b''.join(interleaved)
+
+def swap(data, fmt):
+    """Swaps byte order of given bytearray based on the format given.
+
+    Returns a bytearray.
+    """
+    swap_fmt = ''.join(['>', fmt])
+
+    try:
+        swap_iter = struct.iter_unpack(fmt, data)
+    except struct.error as error:
+        print('ERROR:', error, 'CLOSING', file=sys.stderr)
+        sys.exit(1)
+
+    try:
+        swapped = [struct.pack(swap_fmt, *i) for i in swap_iter]
+    except struct.error as error:
+        print('ERROR:', error, '\nswap_fmt is:', swap_fmt, 'CLOSING', file=sys.stderr)
+        sys.exit(1)
+
+    # print('swapped is:', swapped)
+    return b''.join(swapped)
