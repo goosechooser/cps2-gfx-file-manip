@@ -33,10 +33,10 @@ class CustomFormat(FileFormat):
         self.verboseprint('Opening file')
         fdata = self.open_file(self._filepaths[0])
 
-        self.verboseprint('Byte swapping file every', fmt, 'bytes')
+        self.verboseprint('Swapping endianess in file every', fmt, 'bytes')
         swapped = [swap(fdata, fmt)]
         filename = ['.'.join([os.path.split(fname)[1] for fname in self._filepaths])]
-        suffix = ['.swapped']
+        suffix = ['swapped']
 
         self.save(swapped, filename, suffix)
 

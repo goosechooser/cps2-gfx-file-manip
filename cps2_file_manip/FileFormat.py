@@ -35,5 +35,5 @@ class FileFormat(object):
             with open(filepath, 'rb') as f:
                 return bytearray(f.read())
         except FileNotFoundError as error:
-            print(error, file=sys.stderr)
+            print('Error occured during opening of file:', error, file=sys.stderr)
             sys.exit(1)
