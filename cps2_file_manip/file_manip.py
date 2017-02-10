@@ -19,7 +19,7 @@ def deinterleave(data, nbytes, nsplit):
 
     #this could cause rounding errors?
     iterlen = int(len(data) / (nbytes * nsplit))
-    print('iterlen is:', iterlen)
+    #print('iterlen is:', iterlen)
     for _ in range(iterlen):
         for i, _ in enumerate(deinterleaved):
             try:
